@@ -9,9 +9,11 @@ class Responsive {
 
 
   static double smallScreenWidth=600;
+  static double smallScreenHeight=600;
 
   static Size size(BuildContext context)=>MediaQuery.of(context).size;
-  static bool isSmallScreen(BuildContext context)=>size(context).width<smallScreenWidth;
+  static bool isSmallScreen(BuildContext context)=>(size(context).width<smallScreenWidth || size(context).height<smallScreenHeight);
+  static bool isSmallScreenForWidth(BuildContext context)=>(size(context).width<smallScreenWidth);
 
 
   static double widthPercent(BuildContext context,{

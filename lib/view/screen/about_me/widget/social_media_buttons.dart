@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
-import 'package:portfolio/util/app_constant.dart';
+import 'package:portfolio/repository/app_constant.dart';
 import 'package:portfolio/view/screen/about_me/widget/social_media_button.dart';
 
 class SocialMediaButtons extends StatelessWidget {

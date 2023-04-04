@@ -1,22 +1,30 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
-import 'package:portfolio/app_manager/helper/responsive/widget/responsive_screen.dart';
 import 'package:portfolio/model/option.dart';
-import 'package:portfolio/util/app_constant.dart';
+import 'package:portfolio/repository/app_constant.dart';
+import 'package:portfolio/view/screen/about_me/pages/education_details.dart';
+import 'package:portfolio/view/screen/about_me/pages/hobies_details.dart';
+import 'package:portfolio/view/screen/about_me/pages/languages_details.dart';
+import 'package:portfolio/view/screen/about_me/pages/link_and_summary.dart';
 import 'package:portfolio/view/screen/about_me/widget/bottom_details.dart';
-import 'package:portfolio/view/screen/about_me/widget/profile_widget.dart';
-import 'package:portfolio/view/screen/about_me/widget/summary.dart';
 import 'package:portfolio/view/widget/background.dart';
 import 'package:portfolio/view/widget/page_selector.dart';
-import 'package:portfolio/widget/delayed_widget.dart';
-import 'package:portfolio/view/screen/about_me/widget/social_media_buttons.dart';
 
-class AboutMe extends StatelessWidget {
+class AboutMe extends StatefulWidget {
   const AboutMe({Key? key}) : super(key: key);
 
   @override
+  State<AboutMe> createState() => _AboutMeState();
+}
+
+class _AboutMeState extends State<AboutMe> {
+
+  int _currentIndex=0;
+  CarouselController carouselController = CarouselController();
+
+  @override
   Widget build(BuildContext context) {
-    final theme=Theme.of(context);
     List<Option> options=[
       Option(
           title: "Address",
@@ -31,6 +39,15 @@ class AboutMe extends StatelessWidget {
           value: AppConstants.contact
       ),
     ];
+
+
+    List<Widget> pages=[
+      const LinkAndSummary(),
+      const EducationDetails(),
+      const LanguagesDetails(),
+      const HobbiesDetails(),
+    ];
+
     return SafeArea(
       child: Scaffold(
         body: Background(
@@ -38,62 +55,66 @@ class AboutMe extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const PageSelector(),
-              Expanded(
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20.0,0.0,20.0,0.0,),
-                      child: MyResponsiveScreen(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              runAlignment: WrapAlignment.spaceBetween,
-                              spacing: 40,
-                              runSpacing: 20,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    DelayedWidget(
-                                      delayDuration: const Duration(milliseconds: 1000),
-                                      from: DelayFrom.right,
-                                      child: SelectableText(
-                                        AppConstants.landingTitle,
-                                        style: theme.textTheme.headlineLarge?.copyWith(
-                                          color: Colors.white
-                                        ),
-                                      ),
-                                    ),
-                                    DelayedWidget(
-                                      delayDuration: const Duration(milliseconds: 1500),
-                                      from: DelayFrom.top,
-                                      child: SelectableText(
-                                        AppConstants.landingMotto.toLowerCase(),
-                                        style: theme.textTheme.titleMedium?.copyWith(
-                                            color: Colors.white
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const ProfileWidget()
+               Expanded(
+                child:   Stack(
+                  children: [
+                    CarouselSlider.builder(
+                      carouselController: carouselController,
+                      options: CarouselOptions(
+                        scrollPhysics: const BouncingScrollPhysics(),
+                        viewportFraction: 1,
+                        aspectRatio: Responsive.size(context).width/(Responsive.size(context).height-200),
+                        initialPage: 0,
+                        autoPlay: false,
+                        disableCenter: true,
+                        autoPlayAnimationDuration: const Duration(seconds: 3),
+                        enableInfiniteScroll: true,
+                        scrollDirection: Axis.vertical,
+                        onPageChanged: ((index, reason) {
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        }),
+                      ),
+                      itemCount: pages.length,
+                      itemBuilder: (BuildContext context, int index, int realIndex) {
+                        return pages[index];
+                      },
+                    ),
 
-
-                              ],
+                    Positioned(
+                      right: 10,
+                      bottom: 0,
+                      top: 0,
+                      child: Center(
+                        child: Container(
+                          decoration:  BoxDecoration(
+                              color: Colors.black45,
+                              borderRadius: BorderRadius.circular(5)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(2,0,2,0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: pages.asMap().entries.map((entry) {
+                                return Container(
+                                  width: 8.0,
+                                  height: 8.0,
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 4.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white.withOpacity(
+                                        _currentIndex == entry.key ? 0.9 : 0.4),
+                                  ),
+                                );
+                              }).toList(),
                             ),
-
-                            SizedBox(height: Responsive.isSmallScreen(context)? 20:40,),
-                            const SocialMediaButtons(),
-                            SizedBox(height: Responsive.isSmallScreen(context)? 20:40,),
-                            const Summary()
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
                BottomDetails(

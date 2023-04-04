@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
 import 'package:portfolio/model/option.dart';
 import 'package:portfolio/route_name.dart';
+import 'package:portfolio/repository/app_constant.dart';
+import 'package:portfolio/util/download_file.dart';
 import 'package:portfolio/widget/delayed_widget.dart';
 
 class PageSelector extends StatelessWidget {
@@ -54,7 +56,9 @@ class PageSelector extends StatelessWidget {
           DelayedWidget(
             delayDuration: const Duration(milliseconds: 1000),
             from: DelayFrom.left,
-            child: TextButton(onPressed: (){}, child: Wrap(
+            child: TextButton(onPressed: (){
+              downloadFile(AppConstants.myCVLink);
+            }, child: Wrap(
               children: [
                 const Icon(Icons.download,color: Colors.white,),
                 Responsive.isSmallScreen(context)? Container():Padding(

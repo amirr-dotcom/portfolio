@@ -4,10 +4,11 @@ class Project {
   List<String>? images;
   String? playStore;
   String? appStore;
+  String? website;
   String? company;
 
   Project(
-      {this.name, this.images, this.playStore, this.appStore, this.company});
+      {this.name, this.images, this.playStore, this.appStore, this.company, this.website});
 
   Project.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -15,6 +16,7 @@ class Project {
     playStore = json['playStore'];
     appStore = json['appStore'];
     company = json['company'];
+    website = json['website'];
   }
 
   Map<String, dynamic> toJson() {
@@ -24,6 +26,7 @@ class Project {
     data['playStore'] = playStore;
     data['appStore'] = appStore;
     data['company'] = company;
+    data['website'] = website;
     return data;
   }
 }

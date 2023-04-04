@@ -4,7 +4,7 @@ import 'package:portfolio/route_name.dart';
 import 'package:portfolio/view/screen/about_me/about_me.dart';
 import 'package:portfolio/view/screen/exprience/experience.dart';
 import 'package:portfolio/view/splash_screen_view.dart';
-import 'package:portfolio/util/app_constant.dart';
+import 'package:portfolio/repository/app_constant.dart';
 import 'package:portfolio/view_model/page_selector_view_model.dart';
 import 'package:provider/provider.dart';
 

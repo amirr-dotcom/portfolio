@@ -1,5 +1,5 @@
 name: portfolio
-description: A new Flutter project.
+description: Curriculum Vitae (Syed Amir Raza)
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -40,6 +40,7 @@ dependencies:
   provider: ^6.0.5
   cached_network_image: ^3.2.3
   carousel_slider: ^4.2.1
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

@@ -16,7 +16,7 @@ class MyResponsiveScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      if (Responsive.isSmallScreen(context)) {
+      if (Responsive.isSmallScreenForWidth(context)) {
         return child;
       } else {
         return Container(

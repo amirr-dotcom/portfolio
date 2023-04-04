@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:portfolio/util/app_constant.dart';
+import 'package:portfolio/repository/app_constant.dart';
 
 import '../../../../widget/delayed_widget.dart';
 

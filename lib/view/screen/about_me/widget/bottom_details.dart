@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
 import 'package:portfolio/model/option.dart';
-import 'package:portfolio/util/app_constant.dart';
+import 'package:portfolio/repository/app_constant.dart';
 import 'package:portfolio/widget/delayed_widget.dart';
 
 class BottomDetails extends StatelessWidget {

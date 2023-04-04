@@ -1,6 +1,7 @@
 abstract class AppConstants {
   static const appTitle = 'Syed Amir Raza';
   static const profile = 'Flutter Developer';
+  static const myCVLink = 'https://drive.google.com/uc?id=1G0Htnf54gnLfeHoRTS42jFkraNRh_xlm&export=download';
 
   static const summary = "Flutter Developer specializing in front end development.Experienced with all stages of the development cycle for dynamicapp projects in android and ios. Well-versed in programminglanguages like Java, C, Dart. Strong background in projectmanagement.I have also contributed in flutter library for some of my owndependencies which are mentioned in details and are live ongoogle for use by flutter developers.";
   static const disclaimer = 'I do not claim ownership of the projects below as some of them were developed for companies I worked for and some for clients/clients of my clients while the backend side is provided.';
