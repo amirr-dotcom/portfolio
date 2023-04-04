@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
 import 'package:portfolio/model/option.dart';
 import 'package:portfolio/route_name.dart';
 import 'package:portfolio/widget/delayed_widget.dart';
@@ -23,7 +24,7 @@ class PageSelector extends StatelessWidget {
       ),
     ];
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding:  EdgeInsets.all(Responsive.isSmallScreen(context)? 5:20.0),
       child: Row(
         children: [
           Expanded(
@@ -38,7 +39,7 @@ class PageSelector extends StatelessWidget {
                         context.push(options[index].value);
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding:  EdgeInsets.all(Responsive.isSmallScreen(context)? 2:8.0),
                         child: Text(options[index].title??"",
                           style: theme.textTheme.titleMedium?.copyWith(
                               color: ModalRoute.of(context)?.settings.name==options[index].value? Colors.white:Colors.white54
@@ -56,11 +57,13 @@ class PageSelector extends StatelessWidget {
             child: TextButton(onPressed: (){}, child: Wrap(
               children: [
                 const Icon(Icons.download,color: Colors.white,),
-                const SizedBox(width: 10,),
-                Text(
-                  "Download CV",
-                  style: theme.textTheme.titleMedium?.copyWith(
-                      color: Colors.white
+                Responsive.isSmallScreen(context)? Container():Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    "Download CV",
+                    style: theme.textTheme.titleMedium?.copyWith(
+                        color: Colors.white
+                    ),
                   ),
                 )
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
 import 'package:portfolio/app_manager/helper/responsive/widget/responsive_screen.dart';
 import 'package:portfolio/model/option.dart';
 import 'package:portfolio/util/app_constant.dart';
@@ -30,74 +31,76 @@ class AboutMe extends StatelessWidget {
           value: AppConstants.contact
       ),
     ];
-    return Scaffold(
-      body: Background(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const PageSelector(),
-            Expanded(
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: MyResponsiveScreen(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            runAlignment: WrapAlignment.spaceBetween,
-                            spacing: 40,
-                            runSpacing: 20,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  DelayedWidget(
-                                    delayDuration: const Duration(milliseconds: 1000),
-                                    from: DelayFrom.right,
-                                    child: SelectableText(
-                                      AppConstants.landingTitle,
-                                      style: theme.textTheme.headlineLarge?.copyWith(
-                                        color: Colors.white
-                                      ),
-                                    ),
-                                  ),
-                                  DelayedWidget(
-                                    delayDuration: const Duration(milliseconds: 1500),
-                                    from: DelayFrom.top,
-                                    child: SelectableText(
-                                      AppConstants.landingMotto.toLowerCase(),
-                                      style: theme.textTheme.titleMedium?.copyWith(
+    return SafeArea(
+      child: Scaffold(
+        body: Background(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const PageSelector(),
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20.0,0.0,20.0,0.0,),
+                      child: MyResponsiveScreen(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              runAlignment: WrapAlignment.spaceBetween,
+                              spacing: 40,
+                              runSpacing: 20,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    DelayedWidget(
+                                      delayDuration: const Duration(milliseconds: 1000),
+                                      from: DelayFrom.right,
+                                      child: SelectableText(
+                                        AppConstants.landingTitle,
+                                        style: theme.textTheme.headlineLarge?.copyWith(
                                           color: Colors.white
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const ProfileWidget()
+                                    DelayedWidget(
+                                      delayDuration: const Duration(milliseconds: 1500),
+                                      from: DelayFrom.top,
+                                      child: SelectableText(
+                                        AppConstants.landingMotto.toLowerCase(),
+                                        style: theme.textTheme.titleMedium?.copyWith(
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const ProfileWidget()
 
 
-                            ],
-                          ),
+                              ],
+                            ),
 
-                          const SizedBox(height: 40,),
-                          const SocialMediaButtons(),
-                          const SizedBox(height: 40,),
-                          const Summary()
-                        ],
+                            SizedBox(height: Responsive.isSmallScreen(context)? 20:40,),
+                            const SocialMediaButtons(),
+                            SizedBox(height: Responsive.isSmallScreen(context)? 20:40,),
+                            const Summary()
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-             BottomDetails(
-              options: options,
-            )
-          ],
+               BottomDetails(
+                options: options,
+              )
+            ],
+          ),
         ),
       ),
     );

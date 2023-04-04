@@ -85,48 +85,52 @@ class ProjectView extends StatelessWidget {
         ),
 
         Padding(
-          padding: const EdgeInsets.fromLTRB(20.0,0.0,20.0,40.0),
-          child: Wrap(
-            spacing: 40,
-            runSpacing: 20,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DelayedWidget(
-                    delayDuration: const Duration(milliseconds: 1000),
-                    from: DelayFrom.right,
-                    child: Text(
-                      project.name??"",
-                      style: theme.textTheme.titleLarge?.copyWith(
-                          color: Colors.white
+          padding: Responsive.isSmallScreen(context)? const EdgeInsets.fromLTRB(20.0,0.0,20.0,10.0):const EdgeInsets.fromLTRB(20.0,0.0,20.0,40.0),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Wrap(
+              spacing: Responsive.isSmallScreen(context)? 20:40,
+              runSpacing: 20,
+              clipBehavior: Clip.hardEdge,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DelayedWidget(
+                      delayDuration: const Duration(milliseconds: 1000),
+                      from: DelayFrom.right,
+                      child: Text(
+                        project.name??"",
+                        style: theme.textTheme.titleLarge?.copyWith(
+                            color: Colors.white
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 2,),
-                  DelayedWidget(
-                    delayDuration: const Duration(milliseconds: 1000),
-                    from: DelayFrom.right,
-                    child: Text(
-                      project.company??"",
-                      style: theme.textTheme.titleMedium?.copyWith(
-                          color: Colors.white
+                    const SizedBox(height: 2,),
+                    DelayedWidget(
+                      delayDuration: const Duration(milliseconds: 1000),
+                      from: DelayFrom.right,
+                      child: Text(
+                        project.company??"",
+                        style: theme.textTheme.titleMedium?.copyWith(
+                            color: Colors.white
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              project.playStore==null? Container(
-                width: 0,
-              ):SocialMediaButton(url: project.playStore??"", iconData: FontAwesomeIcons.googlePlay, index: 0,
-              text: project.playStore,),
+                  ],
+                ),
+                project.playStore==null? Container(
+                  width: 0,
+                ):SocialMediaButton(url: project.playStore??"", iconData: FontAwesomeIcons.googlePlay, index: 0,
+                text: Responsive.isSmallScreen(context)? null:project.playStore,),
 
-              project.appStore==null? Container(
-                width: 0,
-              ):SocialMediaButton(url: project.appStore??"", iconData: FontAwesomeIcons.appStore, index: 1,
-                text: project.appStore,),
-            ],
+                project.appStore==null? Container(
+                  width: 0,
+                ):SocialMediaButton(url: project.appStore??"", iconData: FontAwesomeIcons.appStore, index: 1,
+                  text: Responsive.isSmallScreen(context)? null:project.appStore,),
+              ],
+            ),
           ),
         ),
 

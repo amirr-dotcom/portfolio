@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
 import 'package:portfolio/util/app_constant.dart';
 import 'package:portfolio/view/screen/about_me/widget/social_media_button.dart';
 
@@ -14,8 +15,8 @@ class SocialMediaButtons extends StatelessWidget {
     return Container(
       alignment: wrapAlignment,
       child: Wrap(
-        spacing: 16.0,
-        runSpacing: 16.0,
+        spacing: Responsive.isSmallScreen(context)? 8:16.0,
+        runSpacing: Responsive.isSmallScreen(context)? 8:16.0,
         alignment: alignment,
         children: const [
           SocialMediaButton(

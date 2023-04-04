@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
 import 'package:portfolio/model/option.dart';
 import 'package:portfolio/util/app_constant.dart';
 import 'package:portfolio/widget/delayed_widget.dart';
@@ -24,7 +25,7 @@ class BottomDetails extends StatelessWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding:  EdgeInsets.all(Responsive.isSmallScreen(context)? 20:40.0),
             child: Wrap(
               spacing: 20,
               runSpacing: 20,

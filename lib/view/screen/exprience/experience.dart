@@ -32,21 +32,23 @@ class Experience extends StatelessWidget {
           value: ExperienceConstant.workedIn.length.toString()
       ),
     ];
-    return Scaffold(
-      body: Background(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const PageSelector(),
-            Expanded(
-              child: ProjectListing(
-                projects: ExperienceConstant.projectList,
+    return SafeArea(
+      child: Scaffold(
+        body: Background(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const PageSelector(),
+              Expanded(
+                child: ProjectListing(
+                  projects: ExperienceConstant.projectList,
+                ),
               ),
-            ),
-             BottomDetails(
-              options: options,
-            )
-          ],
+               BottomDetails(
+                options: options,
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -16,59 +16,62 @@ class _PhotosViewState extends State<PhotosView> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Expanded(
-          child: CarouselSlider.builder(
-            options: CarouselOptions(
-              viewportFraction: 1,
-              initialPage: 0,
-              autoPlay: true,
-              autoPlayAnimationDuration: const Duration(seconds: 3),
-              enableInfiniteScroll: true,
-              scrollDirection: Axis.horizontal,
-              onPageChanged: ((index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              }),
-            ),
-            itemCount: widget.images.length,
-            itemBuilder: (BuildContext context, int index, int realIndex) {
-              String image = widget.images[index];
-              return CachedNetworkImage(
-                imageUrl: image,
-                imageBuilder: (context, imageProvider) =>
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                        ),
-                        borderRadius: BorderRadius.circular(40)
-                      ),
-                    ),
-                placeholder: (context, url) => const Icon(Icons.error),
-                errorWidget: (context, url, error) => const Center(child: CircularProgressIndicator()),
-              );
-            },
+        CarouselSlider.builder(
+          options: CarouselOptions(
+            viewportFraction: 1,
+            initialPage: 0,
+            aspectRatio: 1,
+            autoPlay: true,
+            autoPlayAnimationDuration: const Duration(seconds: 3),
+            enableInfiniteScroll: true,
+            scrollDirection: Axis.horizontal,
+            onPageChanged: ((index, reason) {
+              setState(() {
+                _currentIndex = index;
+              });
+            }),
           ),
-        ),
-        const SizedBox(height: 20,),
-        Wrap(
-          alignment: WrapAlignment.center,
-          children: widget.images.asMap().entries.map((entry) {
-            return Container(
-              width: 8.0,
-              height: 8.0,
-              margin: const EdgeInsets.symmetric(
-                  vertical: 8.0, horizontal: 4.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withOpacity(
-                    _currentIndex == entry.key ? 0.9 : 0.4),
-              ),
+          itemCount: widget.images.length,
+          itemBuilder: (BuildContext context, int index, int realIndex) {
+            String image = widget.images[index];
+            return CachedNetworkImage(
+              imageUrl: image,
+              imageBuilder: (context, imageProvider) =>
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                      ),
+                      borderRadius: BorderRadius.circular(40)
+                    ),
+                  ),
+              placeholder: (context, url) => const Icon(Icons.error),
+              errorWidget: (context, url, error) => const Center(child: CircularProgressIndicator()),
             );
-          }).toList(),
+          },
+        ),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 10,
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: widget.images.asMap().entries.map((entry) {
+              return Container(
+                width: 8.0,
+                height: 8.0,
+                margin: const EdgeInsets.symmetric(
+                    vertical: 8.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black.withOpacity(
+                      _currentIndex == entry.key ? 0.9 : 0.4),
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ],
     );

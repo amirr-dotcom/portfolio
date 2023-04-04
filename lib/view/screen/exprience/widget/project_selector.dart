@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:portfolio/app_manager/helper/responsive/responsive.dart';
 import 'package:portfolio/model/project.dart';
 import 'package:portfolio/widget/delayed_widget.dart';
 
@@ -14,7 +15,7 @@ class ProjectSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme=Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0,0.0,20.0,20.0),
+      padding:  Responsive.isSmallScreen(context)?const EdgeInsets.fromLTRB( 5.0,0.0,5.0,5.0):const EdgeInsets.fromLTRB( 20.0,0.0,20.0,20.0),
       child: Align(
         alignment: Alignment.centerLeft,
         child: SizedBox(
@@ -32,7 +33,7 @@ class ProjectSelector extends StatelessWidget {
                   onSelectIndex(index);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:  EdgeInsets.all(Responsive.isSmallScreen(context)? 2:8.0),
                   child: Text(projects[index].name??"",
                     style: theme.textTheme.titleMedium?.copyWith(
                         color: currentIndex==index? Colors.white:Colors.white54
